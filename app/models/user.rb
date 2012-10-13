@@ -16,9 +16,7 @@ class User < ActiveRecord::Base
   has_many :categories, through: :user_entries
 
   [:gist, :gem, :screencast, :article].each do |type|
-    define_method "#{type}s" do
-      entries.where(type: type)
-    end
+    define_method("#{type}s") { entries.where(type: type) }
   end
 
   def self.create_from_auth(auth)

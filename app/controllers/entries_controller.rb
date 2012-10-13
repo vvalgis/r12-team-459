@@ -6,10 +6,12 @@ class EntriesController < InheritedResources::Base
     query = params[:q] || ""
     query = URI.unescape(query)
 
-    if query.uri? && current_user.entries.where(url: query).empty?
-      respond_with({ type: "link", link: query, new: true })
+    if query.uri?
+      resource = current_user.entries.find_or_initialize_by_url(query)
+      respond_with({ type: "link", link: query, new: resource.new_record?, resource: resource})
     else
-      respond_with({ type: "results", results: Entry.search_for_user(current_user, query) })
+      resources = current_user.entries.search_for(query)
+      respond_with({ type: "results", results: resources })
     end
   end
 

@@ -5,9 +5,9 @@ class Entry < ActiveRecord::Base
   has_many :categories, through: :user_entries
   # attr_protected :type
 
-  def self.search_for_user(user, query)
-    where("user_id = ? AND (url = ? OR url LIKE ? OR title LIKE ? OR description LIKE ?)",
-      user.id, query, "%#{query}%", "%#{query}%", "%#{query}%")
+  scope :search_for, ->(query) do
+    quoted = "%#{query}%"
+    where("url LIKE ? OR (title LIKE ? OR (description LIKE ?))", query, quoted, quoted)
   end
 
 end
