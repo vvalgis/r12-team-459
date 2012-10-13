@@ -30,11 +30,12 @@
         Your may mark your solutions as "shareable" to allow other users of "My
         Ruby Toolbox" access your knowledge and improve their skills.
 .container
-  %h1.align-center 32 users added more than 24,000 solutions to our database
+  %h1.align-center #{@users_count} users added #{@entries_count} solutions to our database
   %p
     %br
-.container
-  .row
-    .span4.offset4
-      = link_to user_omniauth_authorize_path(:github), class: "btn btn-large btn-primary btn-block" do
-        %span.btn-label Sign in and start using!
+- unless user_signed_in?
+  .container
+    .row
+      .span4.offset4
+        = link_to user_omniauth_authorize_path(:github), class: "btn btn-large btn-primary btn-block" do
+          %span.btn-label Sign in and start using!
