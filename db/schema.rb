@@ -11,24 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013142054) do
+ActiveRecord::Schema.define(:version => 20121013161749) do
 
   create_table "categories", :force => true do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "categories", ["user_id"], :name => "index_categories_on_user_id"
-
-  create_table "categories_entries", :id => false, :force => true do |t|
-    t.integer "category_id"
-    t.integer "entry_id"
-  end
-
-  add_index "categories_entries", ["category_id", "entry_id"], :name => "index_categories_entries_on_category_id_and_entry_id", :unique => true
-  add_index "categories_entries", ["entry_id"], :name => "index_categories_entries_on_entry_id"
 
   create_table "entries", :force => true do |t|
     t.integer  "user_id"
@@ -44,6 +33,18 @@ ActiveRecord::Schema.define(:version => 20121013142054) do
   add_index "entries", ["type"], :name => "index_entries_on_type"
   add_index "entries", ["url"], :name => "index_entries_on_url"
   add_index "entries", ["user_id"], :name => "index_entries_on_user_id"
+
+  create_table "user_entries", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "entry_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "user_entries", ["category_id"], :name => "index_user_entries_on_category_id"
+  add_index "user_entries", ["entry_id"], :name => "index_user_entries_on_entry_id"
+  add_index "user_entries", ["user_id"], :name => "index_user_entries_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",               :default => "", :null => false
