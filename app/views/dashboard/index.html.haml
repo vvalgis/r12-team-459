@@ -5,46 +5,9 @@
   %h2
     Smartfield
     %small the place where magic happens
-  .row
-    %form.form-search
-      .span6
-        %input.input-xxlarge.search-query{ type: "text", placeholder: "Enter your search query here or paste a link to resource you want to add" }
+  %form.form-search
+    %input.input-xxlarge.search-query#search-field{ type: "text", placeholder: "Enter your search query here or paste a link to resource you want to add" }
+    .help-block{ data: { :'show-on-focus' => "search-field" } } To create new entry – paste link started with "http" or "https".
+
   %p &nbsp;
-  %h2 Recently added
-  .row.entries
-    .span3
-      %h3 Gems
-      %dl
-        %dt Devise
-        %dd
-          Flexible authentication solution for Rails with Warden.
-          %small authentication, rails3
-        %dt Unicorn
-        %dd
-          Rack HTTP server for fast clients and Unix
-          %small http, server, highload
-        %dt jquery-ujs
-        %dd
-          Ruby on Rails unobtrusive scripting adapter for jQuery
-          %small js, jquery
-    .span3
-      %h3 Gists
-      %dl
-        %dt ruby-1.9.3-p194 performance patch
-        %dd
-          This script installs a patched version of ruby 1.9.3-p194 with boot-time performance improvements (#66 and #68), and runtime performance improvements (#83 and #84). It also includes the new backported GC from ruby-trunk.
-          %small patch, 1.9.3
-    .span3
-      %h3 Screencasts
-      %dl
-        %dt RC: #384 Exploring RubyGems
-        %dd
-          RubyGems can make it easy to add a feature to a Rails application, but it can also cause headaches down the road. Here I give some tips on researching gems to decide which one to choose, or when to do it from scratch.
-          %small plugins, rubygems, ryanb
-    .span3
-      %h3 Articles
-      %dl
-        %dt Understanding Ruby Blocks, Procs and Lambdas
-        %dd
-          Blocks, Procs and lambdas (referred to as closures in Computer Science) are one of the most powerful aspects of Ruby, and also one of the most misunderstood.
-          %small block, proc, lambda, readitlater
+  = render "recent"

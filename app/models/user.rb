@@ -11,9 +11,15 @@ class User < ActiveRecord::Base
 
   scope :find_by_auth, ->(auth) { where(provider: auth.provider, uid: auth.uid) }
 
-  has_many :entries
+  has_many :entries, include: :categories
   has_many :user_entries
   has_many :categories, through: :user_entries
+
+  [:gist, :gem, :screencast, :article].each do |type|
+    define_method "#{type}s" do
+      entries.where(type: type)
+    end
+  end
 
   def self.create_from_auth(auth)
     args = {

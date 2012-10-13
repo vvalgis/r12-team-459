@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013161749) do
+ActiveRecord::Schema.define(:version => 20121013172237) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(:version => 20121013161749) do
     t.boolean  "shareable",   :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.string   "title"
   end
 
   add_index "entries", ["shareable"], :name => "index_entries_on_shareable"
+  add_index "entries", ["title"], :name => "index_entries_on_title"
   add_index "entries", ["type"], :name => "index_entries_on_type"
   add_index "entries", ["url"], :name => "index_entries_on_url"
   add_index "entries", ["user_id"], :name => "index_entries_on_user_id"

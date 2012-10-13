@@ -1,0 +1,6 @@
+%h2 Recently added
+.row.entries
+  - [:gems, :gists, :screencasts, :articles].each do |type|
+    .span3
+      %h3= type.to_s.capitalize
+      = render partial: "dashboard/entries", locals: { entries: @recent[type] }
