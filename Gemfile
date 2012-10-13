@@ -4,6 +4,10 @@ source "https://rubygems.org"
 gem "rails"
 gem "mysql2"
 
+group :development do
+  gem 'capistrano'
+end
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
