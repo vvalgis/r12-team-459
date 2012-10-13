@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
                   :provider, :uid, :name, :nickname, :avatar_url
   # attr_accessible :title, :body
 
-  # scope :find_by_auth, ->(auth) { where(provider: auth.provider, uid: auth.uid) }
+  scope :find_by_auth, ->(auth) { where(provider: auth.provider, uid: auth.uid) }
 
   def self.create_from_auth(auth)
     args = {
