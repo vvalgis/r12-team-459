@@ -3,16 +3,15 @@ class EntriesController < InheritedResources::Base
   respond_to :json
 
   def search
-    query = params[:q] || ""
-    query = URI.unescape(query)
+    query = URI.unescape(params[:q] || "")
 
-    if query.uri?
-      resource = current_user.entries.find_or_initialize_by_url(query)
-      respond_with({ type: "link", link: query, new: resource.new_record?, resource: resource})
+    status, type, content = if query.uri? && current_user.entries.find_by_url(query).nil?
+      [404, "link", current_user.entries.new(url: query)]
     else
-      resources = current_user.entries.search_for(query)
-      respond_with({ type: "results", results: resources })
+      [200, "results", current_user.entries.search_for(query)]
     end
+
+    respond_with({ status: status, type: type, content: content })
   end
 
 end
