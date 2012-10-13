@@ -28,5 +28,3 @@ namespace :deploy do
     start
   end
 end
-
-load 'deploy/assets'
