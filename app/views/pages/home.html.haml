@@ -1,1 +1,10 @@
 %h1 You need MRT, dude.
+
+= link_to 'Try to login through github', user_omniauth_authorize_path(:github)
+= link_to 'Sign out', destroy_user_session_path, :method => :delete
+
+- if user_signed_in?
+  .user
+    = image_tag current_user.avatar_url if current_user.avatar_url.present?
+    = current_user.nick_and_name
+

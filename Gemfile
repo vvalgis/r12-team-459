@@ -1,8 +1,13 @@
 # A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rails"
-gem "mysql2"
+gem 'rails'
+gem 'mysql2'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-github'
+
+gem 'awesome_print'
 
 group :development do
   gem 'capistrano'

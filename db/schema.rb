@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013111149) do
+ActiveRecord::Schema.define(:version => 20121013142054) do
 
   create_table "categories", :force => true do |t|
     t.integer  "user_id"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20121013111149) do
   end
 
   add_index "categories_entries", ["category_id", "entry_id"], :name => "index_categories_entries_on_category_id_and_entry_id", :unique => true
-  add_index "categories_entries", ["category_id"], :name => "index_categories_entries_on_category_id"
   add_index "categories_entries", ["entry_id"], :name => "index_categories_entries_on_entry_id"
 
   create_table "entries", :force => true do |t|
@@ -42,6 +41,28 @@ ActiveRecord::Schema.define(:version => 20121013111149) do
   end
 
   add_index "entries", ["shareable"], :name => "index_entries_on_shareable"
+  add_index "entries", ["type"], :name => "index_entries_on_type"
+  add_index "entries", ["url"], :name => "index_entries_on_url"
   add_index "entries", ["user_id"], :name => "index_entries_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email",               :default => "", :null => false
+    t.string   "encrypted_password",  :default => "", :null => false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "avatar_url"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end
