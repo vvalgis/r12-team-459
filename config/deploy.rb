@@ -7,7 +7,7 @@ set :scm, :git
 server 'rtfm.r12.railsrumble.com', :app, :web, :db, primary: true
 after "deploy:restart", "deploy:cleanup"
 
-set :deploy_to,   "/root/#{application}/"
+set :deploy_to,   "/root/#{application}"
 set :deploy_via,  :remote_cache
 set :rails_env,   "production"
 
