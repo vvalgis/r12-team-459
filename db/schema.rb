@@ -11,6 +11,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20121013111149) do
+
+  create_table "categories", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "categories", ["user_id"], :name => "index_categories_on_user_id"
+
+  create_table "categories_entries", :id => false, :force => true do |t|
+    t.integer "category_id"
+    t.integer "entry_id"
+  end
+
+  add_index "categories_entries", ["category_id", "entry_id"], :name => "index_categories_entries_on_category_id_and_entry_id", :unique => true
+  add_index "categories_entries", ["category_id"], :name => "index_categories_entries_on_category_id"
+  add_index "categories_entries", ["entry_id"], :name => "index_categories_entries_on_entry_id"
+
+  create_table "entries", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "url"
+    t.text     "description"
+    t.string   "type"
+    t.boolean  "shareable",   :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "entries", ["shareable"], :name => "index_entries_on_shareable"
+  add_index "entries", ["user_id"], :name => "index_entries_on_user_id"
 
 end
