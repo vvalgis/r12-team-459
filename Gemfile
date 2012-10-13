@@ -6,6 +6,7 @@ gem 'mysql2'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'inherited_resources'
 
 gem 'awesome_print'
 
