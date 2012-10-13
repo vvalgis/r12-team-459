@@ -11,6 +11,7 @@ gem 'awesome_print'
 
 group :development do
   gem 'capistrano'
+  gem 'capistrano_colors'
 end
 
 group :production do
