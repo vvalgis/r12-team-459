@@ -9,9 +9,10 @@ base: &vase
 development:
   <<: *vase
   database: rr12d
-  password: 
+  password:
 
 production:
   <<: *vase
   database: rr12p
   password: Te3kKFUGe829kQ3pkm8h
+  socket: /var/run/mysqld/mysqld.sock

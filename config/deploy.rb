@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "application"
 set :repository,  "git@github.com:railsrumble/r12-team-459.git"
 set :scm, :git
