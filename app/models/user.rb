@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   (Entry.types || []).each do |type|
-    define_method(type.to_s.pluralize) { entries.where(type: type.to_s) }
+    define_method(type.to_s.pluralize) { entries.where(type: type.to_s).uniq }
   end
 
   def self.create_from_auth(auth)

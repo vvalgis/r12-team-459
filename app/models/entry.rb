@@ -13,7 +13,7 @@ class Entry < ActiveRecord::Base
   scope :search_for, ->(query) do
     return [] if query.empty?
     quoted = "%#{query}%"
-    where("url LIKE ? OR (title LIKE ? OR (description LIKE ?))", query, quoted, quoted)
+    where("url LIKE ? OR (title LIKE ? OR (description LIKE ?))", quoted, quoted, quoted).uniq
   end
 
   def to_hash
