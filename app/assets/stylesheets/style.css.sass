@@ -76,5 +76,19 @@ a.all-back
     background: rgba(255, 255, 255, .8)
     padding: 15px 0px
     padding-bottom: 0px
-#new-entry-container
+#search-results
+  background: rgba(255, 255, 255, .8)
+  .search-result
+    padding: 5px 20px
+    text-shadow: rgba(255, 255, 255, 1) 0 1px 0
+    .categories
+      font-size: 85%
+      color: #999
+      margin-top: -10px
+    &:nth-child(2n)
+      background: rgba(127, 127, 127, .1)
+#new-entry-container, #search-results-container, .search-result-template, #nothing-found
   display: none
+#nothing-found
+  background: rgba(255, 255, 255, .8)
+  padding: 20px 0px

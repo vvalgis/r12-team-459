@@ -11,8 +11,20 @@ class Entry < ActiveRecord::Base
   accepts_nested_attributes_for :categories
 
   scope :search_for, ->(query) do
+    return [] if query.empty?
     quoted = "%#{query}%"
     where("url LIKE ? OR (title LIKE ? OR (description LIKE ?))", query, quoted, quoted)
+  end
+
+  def to_hash
+    {
+      id: id,
+      title: title,
+      url: url,
+      type: type,
+      category_ids: category_ids,
+      description: description
+    }
   end
 
   def self.types

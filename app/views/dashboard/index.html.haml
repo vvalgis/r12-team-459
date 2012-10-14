@@ -5,7 +5,6 @@
   = form_tag search_entries_path(format: :json), method: :get, remote: true, class: "white form-search", id: "search-form" do
     %input.input-xxlarge.search-query#search-field{ name: 'q', type: "text", placeholder: "Enter search query or paste link started with http:// ot https:// to create a new entry." }
 
-  %p &nbsp;
   #new-entry-container
     %h2 New entry
     .new-entry
@@ -41,6 +40,18 @@
             %span.help-block Coma-separated
         .form-actions
           %input.btn.btn-primary.btn-large{ type: "submit", value: "Create entry" }
+
+  #search-results-container
+    %h2 Search results
+    #search-results
+    #nothing-found
+      %h3.align-center Nothing found
+    .search-result-template
+      .search-result
+        %h4.title
+          %a{ href: '#', target: '_blank' }
+        %p.description
+        %p.categories
 
   %p &nbsp;
   = render "recent"
