@@ -1,11 +1,9 @@
 h1, h2, h3, h4, h5, h6
   text-shadow: rgba(255, 255, 255, 1) 0px 1px 0px
+.hero-unit
+  background-color: rgba(255, 255, 255, .8)
 body
   background-image: url('/assets/bg.png')
-.page-header
-  background: #FFF
-  padding: 10px 20px
-  border-bottom-color: #CCC
 .entries.dashboard
   .span3
     p.muted
@@ -13,6 +11,11 @@ body
       text-align: center
       padding: 10px 0px
   .entry
+    border-bottom: 1px solid rgba(0, 0, 0, .1)
+    padding: 10px 0px
+    &:last-child
+      border-bottom: none
+      padding-bottom: 0px
     .close
       display: none
     &:hover
