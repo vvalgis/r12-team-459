@@ -10,6 +10,8 @@ class Entry < ActiveRecord::Base
 
   accepts_nested_attributes_for :categories
 
+  default_scope order: "entries.id DESC"
+
   scope :search_for, ->(query) do
     return [] if query.empty?
     quoted = "%#{query}%"
