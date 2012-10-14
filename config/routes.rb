@@ -3,6 +3,8 @@ R12Team459::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   match "dashboard" => "dashboard#index", as: :dashboard
+  match "explore" => "dashboard#explore", as: :explore
+
   resources :entries do
     collection do
       get :search

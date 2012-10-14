@@ -9,4 +9,8 @@ class DashboardController < ApplicationController
       articles: current_user.articles.limit(5),
     }
   end
+
+  def explore
+    @categories = current_user.categories.uniq
+  end
 end

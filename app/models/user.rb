@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   has_many :user_entries
   has_many :categories, through: :user_entries
 
+  def entries_for_category(category)
+    entries.joins(:user_entries).merge(user_entries.for_category(category))
+  end
+
   (Entry.types || []).each do |type|
     define_method(type.to_s.pluralize) { entries.where(type: type.to_s) }
   end
