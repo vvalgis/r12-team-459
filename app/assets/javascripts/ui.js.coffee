@@ -11,11 +11,11 @@ $ ->
     searchResultsTemplate = $(".search-result-template").html()
     hash = unescape(window.location.hash).replace /\#/, ''
     loadCategories = ->
-      hash = {}
+      _hash = {}
       $.getJSON "/categories.json", (data) ->
         $.each data, ->
-          hash[@.id] = @
-      hash
+          _hash[@.id] = @
+      _hash
     categories = loadCategories()
 
 
