@@ -1,7 +1,8 @@
 .entry
   %dt
     = link_to entry.title, entry.url
-    %a.close{ href: "#" } &times;
+    = link_to entry, method: :delete, remote: true, class: "close entry-destroy-link" do
+      &times;
   %dd
     = entry.description
     %small= entry.categories.uniq.map{|c| c.name}.join(", ")

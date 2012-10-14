@@ -1,4 +1,8 @@
 $ ->
+  $(".entry-destroy-link").live "ajax:success", ->
+    $(@).closest(".entry").slideUp "fast"
+
+
   if $("#search-field").length
     searchfieldTimeout = ""
     lastQuery = ""
@@ -36,7 +40,8 @@ $ ->
             $("#nothing-found").slideUp "fast", ->
               $.each data.content, ->
                 result = $(searchResultsTemplate)
-                result.find(".title a").attr("href", @.url).html @.title
+                result.find(".title a.url").attr("href", @.url).html @.title
+                result.find(".title a.close").attr "href", "/entries/#{@.id}"
                 result.find(".description").html @.description
                 if 0 < @.category_ids.length
                   cats = []
