@@ -9,7 +9,6 @@ class EntriesController < InheritedResources::Base
       [404, "link", current_user.entries.new(url: query)]
     else
       [200, "results", current_user.entries.search_for(query)]
-      # [200, "results", current_user.entries * 10]
     end
 
     respond_with({ status: status, type: type, content: content })
