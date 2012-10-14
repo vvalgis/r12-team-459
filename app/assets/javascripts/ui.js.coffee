@@ -24,6 +24,7 @@ $ ->
         $("#search-results-container").slideUp "fast"
         $("#new-entry-container").slideUp "fast"
         document.location.hash = ""
+        $("#search-field").focus()
         return false
       document.location.hash = escape field.val()
       field.addClass "loading"
@@ -32,6 +33,8 @@ $ ->
         $("#search-results-container").slideUp "fast"
         $("#entry-url").val data.content.url
         $("#entry-title").val data.content.title
+        $("#entry-description").val ""
+        $("#entry-categories").val ""
         $("#new-entry-form input[type=radio][value='#{data.content.type}']").click()
 
         $("#new-entry-container").slideDown "slow"
