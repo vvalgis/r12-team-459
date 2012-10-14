@@ -8,7 +8,7 @@
   #new-entry-container
     %h2 New entry
     .new-entry
-      = form_tag user_entries_path(format: :json), remote: true, class: "form-horizontal", id: "new-entry-form" do
+      = form_tag entries_path(format: :json), remote: true, class: "form-horizontal", id: "new-entry-form" do
         %input{ type: "hidden", name: "entry[url]", id: "entry-url" }
         .control-group
           %label.control-label{ for: "entry-title" } Title
