@@ -30,7 +30,7 @@
         Your may mark your solutions as "shareable" to allow other users of "My
         Ruby Toolbox" access your knowledge and improve their skills.
 .container
-  %h1.align-center #{@users_count} users added #{@entries_count} solutions to our database
+  %h1.align-center #{User.count} users added #{Entry.count} solutions to our database
   %p
     %br
 - unless user_signed_in?
