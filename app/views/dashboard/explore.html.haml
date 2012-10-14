@@ -1,16 +1,20 @@
 .container
-  %hgroup.page-header
-    %h1
-      Categories
+  %h2
+    Categories
+    %small explore your solutions
   .categories-list
-    = link_to 'Return all', '', class: 'all-back'
-    - @categories.each do |category|
-      %section.category{class: "category-#{category.id}"}
-        %hgroup
-          %h3
-            = link_to category.name, '#'
-        %ul
-          - @entries.select{|e| e.category_id == category.id}.each do |user_entry|
-            %li.entry
-              = link_to user_entry.entry.title, user_entry.entry.url
-              %small.muted= user_entry.entry.description
+    .tabbable.tabs-left
+      %ul.nav.nav-tabs
+        - i = 0
+        - @categories.each do |category|
+          %li{ class: (i += 1) == 1 && "active" }
+            %a{ href: "#category#{category.id}", data: { toggle: "tab" } }= category.name
+      .tab-content
+        - i = 0
+        - @categories.each do |category|
+          .tab-pane{ class: (i += 1) == 1 && "active", id: "category#{category.id}" }
+            %ul
+              - @entries.select{|e| e.category_id == category.id}.each do |user_entry|
+                %li.entry
+                  = link_to user_entry.entry.title, user_entry.entry.url
+                  %small.muted= user_entry.entry.description
