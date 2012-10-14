@@ -2,7 +2,8 @@
   .hero-unit
     %object.well(data="/assets/r150.svg" type="image/svg+xml")
     %h1 My Ruby Toolbox
-    %p Collect, explore and share your code solutions
+    %p Collect explore and share your development experience
+    %p Every time, when you start a new project or get a new task. You need to remember how to do it. What libs are suitable? Where have I seen this tutorial? I've done the same thing already, where I saved it? We are tired of this and want to put all of our experience in one place. So if you share that issue too, sign in and start to collect your knowledge.
     - unless user_signed_in?
       %p
         = link_to user_omniauth_authorize_path(:github), class: "btn btn-large btn-primary" do
