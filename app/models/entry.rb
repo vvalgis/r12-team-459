@@ -9,6 +9,7 @@ class Entry < ActiveRecord::Base
   after_initialize :determinate_type
 
   scope :search_for, ->(query) do
+    return [] if query.empty?
     quoted = "%#{query}%"
     where("url LIKE ? OR (title LIKE ? OR (description LIKE ?))", query, quoted, quoted)
   end

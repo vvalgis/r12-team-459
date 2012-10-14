@@ -3,19 +3,42 @@ $ ->
     searchfieldTimeout = ""
     lastQuery = ""
     field = $("#search-field")
+    searchResults = $("#search-results")
+    searchResultsTemplate = $(".search-result-template").html()
     hash = unescape(window.location.hash).replace /\#/, ''
 
     $("#search-form").bind "ajax:before", ->
+      if 0 == field.val().length
+        $("#search-results-container").slideUp "fast"
+        $("#new-entry-container").slideUp "fast"
+        return false
       document.location.hash = escape field.val()
       field.addClass "loading"
     .bind "ajax:success", (xhr, data, status) ->
       if "link" == data.type and 404 == data.status
+        $("#search-results-container").slideUp "fast"
         $("#entry-url").val data.content.url
-        console.log "#search-form input[type=radio][value='#{data.content.type}']"
         $("#new-entry-form input[type=radio][value='#{data.content.type}']").click()
 
         $("#new-entry-container").slideDown "slow", ->
           $(@).find("input[type=text]")[0].focus()
+      if "results" == data.type and 200 == data.status
+        $("#new-entry-container").slideUp "slow"
+        $("#search-results-container").slideDown "fast"
+        searchResults.slideUp "fast", ->
+          $(@).html ""
+
+          if 0 < data.content.length
+            $("#nothing-found").slideUp "fast", ->
+              $.each data.content, ->
+                result = $(searchResultsTemplate)
+                result.find(".title a").attr("href", @.url).html @.title
+                result.find(".description").html @.description
+                result.find(".categories").html @.type
+                result.appendTo searchResults
+              searchResults.slideDown "fast"
+          else
+            $("#nothing-found").slideDown "fast"
     .bind "ajax:complete", ->
       $("#search-field").removeClass "loading"
 
