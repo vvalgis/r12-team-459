@@ -3,8 +3,7 @@
     Smartfield
     %small the place where magic happens
   %form.white.form-search{action: search_entries_path(format: :json)}
-    %input.input-xxlarge.search-query#search-field{ name: 'q', type: "text", placeholder: "Enter your search query here or paste a link to resource you want to add" }
-    .help-block{ data: { :'show-on-focus' => "search-field" } } To create new entry – paste link started with "http" or "https".
+    %input.input-xxlarge.search-query#search-field{ name: 'q', type: "text", placeholder: "Enter search query or paste link started with http:// ot https:// to create a new entry." }
 
   %p &nbsp;
   = render "recent"
