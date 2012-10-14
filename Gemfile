@@ -7,6 +7,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'inherited_resources'
+gem 'unicode_utils'
 
 gem 'awesome_print'
 

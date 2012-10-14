@@ -1,3 +1,5 @@
+require 'unicode_utils'
+
 class EntriesController < InheritedResources::Base
   before_filter :authenticate_user!
   respond_to :json
@@ -20,7 +22,7 @@ class EntriesController < InheritedResources::Base
 
   def prepare_create_params
     params[:entry][:user_id] = current_user.id
-    cats = params[:entry].delete(:categories).split(',').map(&:strip).map do|name|
+    cats = UnicodeUtils.downcase(params[:entry].delete(:categories)).split(',').map(&:strip).map do|name|
       current_user.categories.find_or_create_by_name(name)
     end
     params[:entry][:user_entries] = cats.map do |c|

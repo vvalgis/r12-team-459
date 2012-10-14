@@ -1,3 +1,5 @@
+require 'unicode_utils'
+
 class UserEntriesController < InheritedResources::Base
   before_filter :authenticate_user!
 
@@ -7,7 +9,7 @@ class UserEntriesController < InheritedResources::Base
     params[:user_entry][:user_id] = current_user.id
     entry = params[:user_entry]
     if entry[:categories].present?
-      categories = entry[:categories].split(',').map(&:strip).map do |name|
+      categories = UnicodeUtils.downcase(entry[:categories]).split(',').map(&:strip).map do |name|
         current_user.categories.find_or_create_by_name(name).id
       end
     end
