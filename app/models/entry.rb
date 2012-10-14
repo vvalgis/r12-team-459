@@ -14,6 +14,17 @@ class Entry < ActiveRecord::Base
     where("url LIKE ? OR (title LIKE ? OR (description LIKE ?))", query, quoted, quoted)
   end
 
+  def to_hash
+    {
+      id: id,
+      title: title,
+      url: url,
+      type: type,
+      category_ids: category_ids,
+      description: description
+    }
+  end
+
   def self.types
     @types ||= [Gist.new, Gem.new, Screencast.new, Article.new]
   end

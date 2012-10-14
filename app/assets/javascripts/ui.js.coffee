@@ -6,6 +6,11 @@ $ ->
     searchResults = $("#search-results")
     searchResultsTemplate = $(".search-result-template").html()
     hash = unescape(window.location.hash).replace /\#/, ''
+    categories = {}
+    $.getJSON "/categories.json", (data) ->
+      $.each data, ->
+        categories[@.id] = @
+
 
     $("#search-form").bind "ajax:before", ->
       if 0 == field.val().length
@@ -33,7 +38,14 @@ $ ->
                 result = $(searchResultsTemplate)
                 result.find(".title a").attr("href", @.url).html @.title
                 result.find(".description").html @.description
-                result.find(".categories").html @.type
+                if 0 < @.category_ids.length
+                  cats = []
+                  $.each @.category_ids, ->
+                    cats.push categories[@].name
+
+                  result.find(".categories").html cats.join(", ")
+                else
+                  result.find(".categories").remove()
                 result.appendTo searchResults
               searchResults.slideDown "fast"
           else
