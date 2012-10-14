@@ -10,7 +10,9 @@ class EntriesController < InheritedResources::Base
     status, type, content = if query.uri? && current_user.entries.find_by_url(query).nil?
       [404, "link", current_user.entries.new(url: query)]
     else
-      [200, "results", current_user.entries.search_for(query).map(&:to_hash)]
+      cat_ids = current_user.categories.search_for(query).map(&:id)
+      from_categores = current_user.entries.where('user_entries.category_id' => cat_ids).map(&:to_hash)
+      [200, "results", current_user.entries.search_for(query).map(&:to_hash) + (from_categores)]
     end
 
     respond_with({ status: status, type: type, content: content })
