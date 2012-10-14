@@ -20,8 +20,7 @@ $ ->
         $("#entry-url").val data.content.url
         $("#new-entry-form input[type=radio][value='#{data.content.type}']").click()
 
-        $("#new-entry-container").slideDown "slow", ->
-          $(@).find("input[type=text]")[0].focus()
+        $("#new-entry-container").slideDown "slow"
       if "results" == data.type and 200 == data.status
         $("#new-entry-container").slideUp "slow"
         $("#search-results-container").slideDown "fast"
