@@ -13,8 +13,10 @@ class EntriesController < InheritedResources::Base
       [404, "link", current_user.entries.new(url: query)]
     else
       cat_ids = current_user.categories.search_for(query).map(&:id)
+      results = current_user.entries.search_for(query).map(&:to_hash)
       from_categores = current_user.entries.where('user_entries.category_id' => cat_ids).map(&:to_hash)
-      [200, "results", current_user.entries.search_for(query).map(&:to_hash) + (from_categores)]
+
+      [200, "results", (results + from_categores).uniq]
     end
 
     respond_with({ status: status, type: type, content: content })
