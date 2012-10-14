@@ -1,1 +1,4 @@
-%dl= render partial: "dashboard/entry", collection: entries
+- if entries.any?
+  %dl= render partial: "dashboard/entry", collection: entries
+- else
+  %p.lead.muted No entries
