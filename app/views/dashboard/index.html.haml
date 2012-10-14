@@ -2,8 +2,45 @@
   %h2
     Smartfield
     %small the place where magic happens
-  %form.white.form-search{action: search_entries_path(format: :json)}
+  = form_tag search_entries_path(format: :json), method: :get, remote: true, class: "white form-search", id: "search-form" do
     %input.input-xxlarge.search-query#search-field{ name: 'q', type: "text", placeholder: "Enter search query or paste link started with http:// ot https:// to create a new entry." }
+
+  %p &nbsp;
+  #new-entry-container
+    %h2 New entry
+    .new-entry
+      = form_tag entries_path(format: :json), remote: true, class: "form-horizontal", id: "new-entry-form" do
+        %input{ type: "hidden", name: "entry[url]", id: "entry-url" }
+        .control-group
+          %label.control-label{ for: "entry-title" } Title
+          .controls
+            %input.input-xxlarge{ type: "text", name: "entry[title]", id: "entry-title" }
+        .control-group
+          %label.control-label{ for: "entry-description" } Description
+          .controls
+            %textarea.input-xxlarge{ name: "entry[description]", id: "entry-description", rows: 5 }
+        .control-group
+          %label.control-label Type
+          .controls
+            %label.radio
+              %input{ type: "radio", name: "entry[type]", value: "gist" }
+              Gist
+            %label.radio
+              %input{ type: "radio", name: "entry[type]", value: "gem" }
+              Gem
+            %label.radio
+              %input{ type: "radio", name: "entry[type]", value: "screencast" }
+              Screencast
+            %label.radio
+              %input{ type: "radio", name: "entry[type]", value: "article" }
+              Article
+        .control-group
+          %label.control-label{ for: "entry-categories" } Categories
+          .controls
+            %input.input-xxlarge{ type: "text", name: "entry[categories]", id: "entry-categories" }
+            %span.help-block Coma-separated
+        .form-actions
+          %input.btn.btn-primary.btn-large{ type: "submit", value: "Create entry" }
 
   %p &nbsp;
   = render "recent"

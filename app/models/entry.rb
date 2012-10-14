@@ -2,7 +2,7 @@ class Entry < ActiveRecord::Base
   self.inheritance_column = :must_be_type_but_we_not_use_sti
 
   belongs_to :user
-  attr_accessible :description, :shareable, :url, :title
+  attr_accessible :description, :shareable, :url, :title, :type
   has_many :user_entries
   has_many :categories, through: :user_entries
   # attr_protected :type
