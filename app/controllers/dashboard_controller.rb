@@ -9,4 +9,9 @@ class DashboardController < ApplicationController
       articles: current_user.articles.limit(5),
     }
   end
+
+  def explore
+    @categories = current_user.categories
+    @entries = current_user.user_entries.includes(:entry).where('user_entries.category_id' => @categories.map{|c| c.id})
+  end
 end

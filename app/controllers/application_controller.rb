@@ -5,9 +5,4 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource) || resource.is_a?(User) ? dashboard_path : super
   end
 
-  def home
-    @users_count = User.count
-    @entries_count = Entry.count
-  end
-
 end

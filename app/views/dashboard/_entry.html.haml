@@ -4,4 +4,4 @@
     %a.close{ href: "#" } &times;
   %dd
     = entry.description
-    %small= entry.categories.join(", ")
+    %small= entry.categories.uniq.map{|c| c.name}.join(", ")

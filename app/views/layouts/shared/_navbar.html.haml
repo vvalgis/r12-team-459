@@ -5,7 +5,8 @@
       .navbar-content
         %ul.nav
           %li{ class: params[:action] == "home" && "active" }= link_to "About", root_path
-          %li{ class: params[:controller] == "dashboard" && "active" }= link_to "Dashboard", dashboard_path
+          %li{ class: controller_name == "dashboard" && action_name == "index" && "active" }= link_to "Dashboard", dashboard_path
+          %li{ class: controller_name == "dashboard" && action_name == "explore" && "active" }= link_to "Explore", explore_path
         - if user_signed_in?
           %ul.nav.pull-right
             %li.dropdown

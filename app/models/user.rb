@@ -11,9 +11,14 @@ class User < ActiveRecord::Base
 
   scope :find_by_auth, ->(auth) { where(provider: auth.provider, uid: auth.uid) }
 
-  has_many :entries, include: :categories
+  has_many :all_entries, class_name: 'Entry'
+  has_many :entries, include: :categories, through: :user_entries
   has_many :user_entries
-  has_many :categories, through: :user_entries
+  has_many :categories, through: :user_entries, uniq: true
+
+  def entries_for_category(category)
+    entries.merge(categories.where(id: category.id))
+  end
 
   (Entry.types || []).each do |type|
     define_method(type.to_s.pluralize) { entries.where(type: type.to_s) }

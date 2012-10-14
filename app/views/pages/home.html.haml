@@ -1,7 +1,9 @@
 .container
   .hero-unit
+    %object.well(data="/assets/r150.svg" type="image/svg+xml")
     %h1 My Ruby Toolbox
-    %p Collect, explore and share your code solutions
+    %p Collect explore and share your development experience
+    %p Every time, when you start a new project or get a new task. You need to remember how to do it. What libs are suitable? Where have I seen this tutorial? I've done the same thing already, where I saved it? We are tired of this and want to put all of our experience in one place. So if you share that issue too, sign in and start to collect your knowledge.
     - unless user_signed_in?
       %p
         = link_to user_omniauth_authorize_path(:github), class: "btn btn-large btn-primary" do
@@ -11,26 +13,26 @@
     .span4
       %h2 Collect
       %p
-        %a{ href: "#" }= image_tag "http://placehold.it/370x200"
+        %a{ href: "#" }= svg_tag 'p'
       %p
         Just paste link to gem, gist, screencast or article, add comment and you
         will be able to access your solutions base anytime and everywhere.
     .span4
       %h2 Explore
       %p
-        %a{ href: "#" }= image_tag "http://placehold.it/370x200"
+        %a{ href: "#" }= svg_tag 'p'
       %p
         You didn't have a solution for task you work on? Not a problem! We will
         suggest you relevant solutions from another users.
     .span4
       %h2 Share
       %p
-        %a{ href: "#" }= image_tag "http://placehold.it/370x200"
+        %a{ href: "#" }= svg_tag 'p'
       %p
         Your may mark your solutions as "shareable" to allow other users of "My
         Ruby Toolbox" access your knowledge and improve their skills.
 .container
-  %h1.align-center #{@users_count} users added #{@entries_count} solutions to our database
+  %h1.align-center #{User.count} users added #{Entry.count} solutions to our database
   %p
     %br
 - unless user_signed_in?

@@ -1,5 +1,5 @@
 class Entry < ActiveRecord::Base
-  set_inheritance_column :must_be_type_but_we_not_use_sti
+  self.inheritance_column = :must_be_type_but_we_not_use_sti
 
   belongs_to :user
   attr_accessible :description, :shareable, :url, :title
