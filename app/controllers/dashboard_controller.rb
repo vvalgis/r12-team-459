@@ -11,6 +11,7 @@ class DashboardController < ApplicationController
   end
 
   def explore
-    @categories = current_user.categories.uniq
+    @categories = current_user.categories
+    @entries = current_user.user_entries.includes(:entry).where('user_entries.category_id' => @categories.map{|c| c.id})
   end
 end

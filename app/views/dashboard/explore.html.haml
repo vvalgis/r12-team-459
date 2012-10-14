@@ -1,13 +1,16 @@
 .container
-  .page-header
+  %hgroup.page-header
     %h1
       Categories
-
-  %dl
+  .categories-list
+    = link_to 'Return all', '', class: 'all-back'
     - @categories.each do |category|
-      %dt
-        = link_to category.name, '#'
-      %dd
+      %section.category{class: "category-#{category.id}"}
+        %hgroup
+          %h3
+            = link_to category.name, '#'
         %ul
-          - current_user.entries_for_category(category).each do |entry|
-            %li= entry.title
+          - @entries.select{|e| e.category_id == category.id}.each do |user_entry|
+            %li.entry
+              = link_to user_entry.entry.title, user_entry.entry.url
+              %small.muted= user_entry.entry.description
