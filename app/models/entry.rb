@@ -2,11 +2,13 @@ class Entry < ActiveRecord::Base
   self.inheritance_column = :must_be_type_but_we_not_use_sti
 
   belongs_to :user
-  attr_accessible :description, :shareable, :url, :title, :type
+  attr_accessible :description, :shareable, :url, :title, :type, :user_entries, :user_id
   has_many :user_entries
   has_many :categories, through: :user_entries
   # attr_protected :type
   after_initialize :determinate_type
+
+  accepts_nested_attributes_for :categories
 
   scope :search_for, ->(query) do
     quoted = "%#{query}%"
@@ -40,7 +42,7 @@ class Entry < ActiveRecord::Base
   class Gem < Type
     private
     def domains
-      @domains ||= %w(github.com rubygems.com)
+      @domains ||= %w(github.com rubygems.org)
     end
   end
 
