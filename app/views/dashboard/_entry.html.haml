@@ -1,4 +1,7 @@
-%dt= entry.title
+.entry
+  %dt
+    = link_to entry.title, entry.url
+    %a.close{ href: "#" } &times;
   %dd
     = entry.description
     %small= entry.categories.join(", ")

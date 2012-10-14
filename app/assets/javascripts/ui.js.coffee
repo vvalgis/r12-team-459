@@ -4,3 +4,6 @@ $ ->
       $(@).slideDown "fast"
     .blur =>
       $(@).slideUp "fast"
+
+  if $("#search-field").length
+    $("#search-field").focus()
